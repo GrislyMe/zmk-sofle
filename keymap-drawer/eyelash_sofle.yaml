@@ -193,8 +193,10 @@ layers:
   - {type: held}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:backup-restore$$', type: bootloader}
-  - '&soft_off'
+  - {t: '$$mdi:transfer$$', type: trans}
   - $$mdi:progress-download$$
 combos:
-- p: [14, 28, 40]
+- p: [57, 55, 54, 53]
+  k: '&soft_off'
+- p: [59, 61, 62, 63]
   k: '&soft_off'
