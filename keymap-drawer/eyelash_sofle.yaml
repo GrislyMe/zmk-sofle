@@ -196,7 +196,7 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - $$mdi:progress-download$$
 combos:
-- p: [57, 55, 54, 53]
+- p: [55, 54, 53]
   k: '&soft_off'
-- p: [59, 61, 62, 63]
+- p: [61, 62, 63]
   k: '&soft_off'
