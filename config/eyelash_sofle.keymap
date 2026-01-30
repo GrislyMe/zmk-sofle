@@ -44,12 +44,12 @@
 
         soft_off_left {
             bindings = <&soft_off>;
-            key-positions = <57 55 54 53>;
+            key-positions = <55 54 53>;
         };
 
         soft_off_right {
             bindings = <&soft_off>;
-            key-positions = <59 61 62 63>;
+            key-positions = <61 62 63>;
         };
     };
 
