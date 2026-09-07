@@ -59,3 +59,5 @@ west update
 
 # 編譯韌體
 west build -s zmk/app -b sofle_left -- -DZMK_CONFIG="$PWD/config"
+```
+![SofleKeyMap](keymap-drawer/eyelash_sofle.svg)
