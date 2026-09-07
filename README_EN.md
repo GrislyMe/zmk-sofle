@@ -5,6 +5,7 @@
 
 Custom ZMK firmware configuration for the **Sofle** wireless split keyboard.
 
+> Written by Gemini
 ---
 
 ## Keymap Editing and Firmware Building
