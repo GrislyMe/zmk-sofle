@@ -6,7 +6,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
@@ -36,6 +35,23 @@
         tap-ms = <100>;
     };
 
+    HoldTap: HoldTap {
+        compatible = "zmk,behavior-hold-tap";
+        label = "HOLDTAP";
+        bindings = <&kp>, <&stickyTime>;
+
+        #binding-cells = <2>;
+        tapping-term-ms = <50>;
+    };
+
+    stickyTime: stickyTime {
+        compatible = "zmk,behavior-sticky-key";
+        label = "STICKYTIME";
+        bindings = <&kp>;
+        #binding-cells = <1>;
+        release-after-ms = <800>;
+    };
+
     behaviors {
     };
 
@@ -58,11 +74,11 @@
 
         Input {
             bindings = <
-&kp ESC    &kp N1     &kp N2        &kp N3        &kp N4     &kp N5    &mmv MOVE_UP     &kp N6  &kp N7     &kp N8        &kp N9           &kp N0      &kp BACKSPACE
-&kp TAB    &kp Q      &kp W         &kp E         &kp R      &kp T     &mmv MOVE_DOWN   &kp Y   &kp U      &kp I         &kp O            &kp P       &kp BSLH
-&kp CAPS   &kp A      &kp S         &kp D         &kp F      &kp G     &mmv MOVE_LEFT   &kp H   &kp J      &kp K         &kp L            &kp SEMI    &kp ENTER
-&kp LSHFT  &kp Z      &kp X         &kp C         &kp V      &kp B     &mmv MOVE_RIGHT  &kp N   &kp M      &kp COMMA     &kp DOT          &kp FSLH    &kp LEFT_SHIFT
-&trans     &kp LCTRL  &kp LEFT_GUI  &kp LEFT_ALT  &kp SPACE  &mo 1     &trans           &mo 1   &kp SPACE  &kp LEFT_WIN  &kp RIGHT_SHIFT  &kp DELETE
+&kp ESC    &kp N1   &kp N2        &kp N3        &kp N4     &kp N5    &mmv MOVE_UP     &kp N6  &kp N7     &kp N8         &kp N9         &kp N0    &kp BACKSPACE
+&kp TAB    &kp Q    &kp W         &kp E         &kp R      &kp T     &mmv MOVE_DOWN   &kp Y   &kp U      &kp I          &kp O          &kp P     &kp BSLH
+&kp CAPS   &kp A    &kp S         &kp D         &kp F      &kp G     &mmv MOVE_LEFT   &kp H   &kp J      &kp K          &kp L          &kp SEMI  &kp ENTER
+&kp LSHFT  &kp Z    &kp X         &kp C         &kp V      &kp B     &mmv MOVE_RIGHT  &kp N   &kp M      &kp COMMA      &kp DOT        &kp FSLH  &kp LEFT_SHIFT
+&trans     &kp F24  &kp LEFT_ALT  &kp LEFT_GUI  &kp SPACE  &mo 1     &trans           &mo 1   &kp SPACE  &kp RIGHT_GUI  &kp RIGHT_ALT  &kp F24
             >;
 
             display-name = "Input";
@@ -70,11 +86,11 @@
 
         Navi {
             bindings = <
-&kp GRAVE  &kp F1  &kp F2     &kp F3     &kp F4     &kp F5      &mmv MOVE_UP     &trans          &trans          &trans        &trans           &kp MINUS         &kp EQUAL
-&kp TILDE  &kp F6  &kp F7     &kp F8     &kp F9     &kp F10     &mmv MOVE_DOWN   &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END          &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&trans     &trans  &mkp LCLK  &mkp MCLK  &mkp RCLK  &mkp MB5    &mmv MOVE_LEFT   &kp LEFT        &kp DOWN        &kp UP        &kp RIGHT        &kp LEFT_BRACE    &kp RIGHT_BRACE
-&trans     &trans  &trans     &trans     &trans     &mkp MB4    &mmv MOVE_RIGHT  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &kp SINGLE_QUOTE  &kp DOUBLE_QUOTES
-&trans     &sl 2   &trans     &trans     &trans     &trans      &trans           &trans          &trans          &trans        &trans           &trans
+&kp GRAVE                         &kp F1  &kp F2     &kp F3     &kp F4     &kp F5      &mmv MOVE_UP     &trans          &trans          &trans        &trans           &kp MINUS         &kp EQUAL
+&kp TILDE                         &kp F6  &kp F7     &kp F8     &kp F9     &kp F10     &mmv MOVE_DOWN   &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END          &kp LEFT_BRACKET  &kp RIGHT_BRACKET
+&trans                            &trans  &mkp LCLK  &mkp MCLK  &mkp RCLK  &mkp MB5    &mmv MOVE_LEFT   &kp LEFT        &kp DOWN        &kp UP        &kp RIGHT        &trans            &kp APOS
+&HoldTap LEFT_SHIFT LEFT_CONTROL  &trans  &trans     &trans     &trans     &mkp MB4    &mmv MOVE_RIGHT  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans            &HoldTap RIGHT_SHIFT LEFT_CONTROL
+&trans                            &sl 2   &trans     &trans     &trans     &trans      &trans           &trans          &trans          &trans        &trans           &trans
             >;
 
             display-name = "Navi";
@@ -85,7 +101,7 @@
             bindings = <
 &kp TILDE  &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &mmv MOVE_UP     &trans  &trans  &trans      &trans  &trans       &trans
 &trans     &bt BT_CLR    &bt BT_CLR_ALL  &trans        &trans        &trans          &mmv MOVE_DOWN   &trans  &trans  &trans      &trans  &trans       &trans
-&trans     &out OUT_USB  &out OUT_BLE    &trans        &trans        &trans          &mmv MOVE_LEFT   &trans  &trans  &trans      &trans  &trans       &trans
+&trans     &trans        &trans          &trans        &trans        &trans          &mmv MOVE_LEFT   &trans  &trans  &trans      &trans  &trans       &trans
 &trans     &trans        &trans          &trans        &trans        &trans          &mmv MOVE_RIGHT  &trans  &trans  &trans      &trans  &trans       &trans
 &trans     &trans        &trans          &trans        &trans        &trans          &mkp LCLK        &trans  &trans  &sys_reset  &trans  &bootloader
             >;
