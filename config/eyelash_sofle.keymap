@@ -41,7 +41,7 @@
         bindings = <&kp>, <&stickyTime>;
 
         #binding-cells = <2>;
-        tapping-term-ms = <50>;
+        tapping-term-ms = <175>;
     };
 
     stickyTime: stickyTime {
