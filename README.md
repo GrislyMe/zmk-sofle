@@ -1,4 +1,5 @@
 # ZMK Config - Sofle 鍵盤設定檔
+#### [English Version](README_EN.md)
 
 > **Fork 專案說明**
 > 本專案於 **2026 年 3 月** (請依實際 Fork 時間修改) Fork 自上游原始倉庫，主要用於個人 Sofle 鍵盤的按鍵佈局（Keymap）客製化、功能微調與自動化韌體編譯管理。
