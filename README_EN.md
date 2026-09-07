@@ -1,27 +1,61 @@
-# Sofle
+# ZMK Config - Sofle Keyboard
 
-- [Chinese](README.md)
-- [English](README_EN.md)
+> **Fork Notice**
+> This repository was forked from the upstream source in **March 2026** (update to your actual fork date) for custom Sofle keymaps, layout adjustments, and automated firmware builds.
 
-## Update List
+Custom ZMK firmware configuration for the **Sofle** wireless split keyboard.
 
-- 2024/12/21
-  1. Added support for zmk-studio (just refresh the left hand to use).
-- 2024/10/24
-  1. Modified power supply mode to reduce power consumption.
-  2. Fixed the automatic shut-off feature for RGB power supply.
-- 2025/8/22
-  1. update the soft off.When you press the keys Q, S and Z simultaneously and hold them for 2 seconds, the keyboard will enter a deep sleep state and cannot be awakened by pressing the keys. This function can be used when carrying it outside. The activation method is to press the reset switch once.
-  2. This month, I also updated the ultra-thin versions of the corne and sofle cases. The frame and base plate have been thickened, and the opening of the reset switch has been adjusted, so that the reset switch can be easily pressed. At present, we are still conceptualizing how to design the shell with an inclined bracket.If you have carefully examined a PCB, you will notice that there are reserved interfaces for expansion IO. I wonder if anyone has been able to utilize them,I will try it！
-  3. The GIF animations on the right-hand keyboard screen have been removed, which will significantly reduce the power consumption of the right-hand keyboard.
+---
 
-> If your  sofle was updated before 2025/8/22, please update to the latest firmware.
->
+## Keymap Editing and Firmware Building
 
-## Contact Me
+### 1. Using Keymap Editor (Recommended)
+It is recommended to use the [Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) web interface to customize keymaps:
+* **Visual Interface**: Easily modify layers, keycodes, and macros through an intuitive UI.
+* **GitHub CI/CD Integration**: Once linked to this repository, saving changes on the website automatically commits the updates and triggers a GitHub Actions build to compile your firmware.
 
-For 3D printed model files or any issues and malfunctions with the keyboard, please contact [380465425@qq.com](mailto:380465425@qq.com)
+### 2. Manual Configuration
+* You can also directly edit the configuration files under the `config/` directory (e.g., `config/sofle.keymap` or `config/sofle.conf`).
+* Commit and push your changes to the `main` branch to trigger an automatic GitHub Actions build.
 
-## Sofle Keymap
+---
 
-![Sofle键位图](keymap-drawer/eyelash_sofle.svg)
+## Retrieving Firmware (GitHub Actions)
+
+1. After pushing changes to GitHub, navigate to the **Actions** tab in this repository.
+2. Select the latest workflow run.
+3. Scroll down to the Artifacts section to download the compiled `.uf2` / `.bin` firmware files.
+
+---
+
+## Flashing Instructions
+
+1. Double-press the reset button on your target keyboard half (or dongle) to enter **Bootloader Mode**.
+2. Connect the half to your computer using a USB cable. It will mount as a removable drive (e.g., `NICENANO`).
+3. Drag and drop (or copy) the corresponding `.uf2` file into the mounted drive:
+   * `sofle_left.uf2` / `sofle_left_nice_view.uf2` -> Left half
+   * `sofle_right.uf2` / `sofle_right_nice_view.uf2` -> Right half
+4. The drive will automatically unmount and reboot once flashing is complete.
+
+> **Troubleshooting / Reset:**
+> If Bluetooth pairing issues occur or the two halves fail to communicate, flash `settings_reset.uf2` to both halves first before re-flashing the main firmware.
+
+---
+
+## Local Development (Optional)
+
+If you prefer building locally using `west` or Docker/Podman:
+
+```bash
+# Clone the repository
+git clone [https://github.com/GrislyMe/zmk-sofle.git](https://github.com/GrislyMe/zmk-sofle.git)
+cd zmk-sofle
+
+# Initialize West workspace
+west init -l config
+west update
+
+# Build firmware
+west build -s zmk/app -b sofle_left -- -DZMK_CONFIG="$PWD/config"
+```
+![SofleKeyMap](keymap-drawer/eyelash_sofle.svg)
