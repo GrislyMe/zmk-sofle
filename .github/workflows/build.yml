@@ -1,11 +1,25 @@
-name: Build ZMK firmware
+name: Build Firmware
+
 on:
-  workflow_dispatch:
   push:
+    branches:
+      - main
     paths-ignore:
+      - '**.md'
       - "keymap-drawer/**"
+      - '.gitignore'
+      - 'LICENSE'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - "keymap-drawer/**"
+      - '.gitignore'
+      - 'LICENSE'
+  workflow_dispatch:
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3.0
 
