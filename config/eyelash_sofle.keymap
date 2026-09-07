@@ -49,7 +49,7 @@
         label = "STICKYTIME";
         bindings = <&kp>;
         #binding-cells = <1>;
-        release-after-ms = <800>;
+        release-after-ms = <1300>;
     };
 
     behaviors {
